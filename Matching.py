@@ -4,7 +4,7 @@ from xmlrpc.client import boolean
  # Class Name: position
  # Class Variables:
  #  1) [str] name : the name of the position
- #  2) [int] opening : the amount of opened positions of the position
+ #  2) [str] opening : the amount of opened positions of the position
  #  3) [list] preference : the list of preferenced applicants by the position
  #  4) [list] match : the list of matched applicants of the position
  # Usage: stores the data of the position to be used by the match class
@@ -158,7 +158,7 @@ class applicant:
     def checkPriority(self,targetposition:str)->bool:
         matchindex=self._preferences.index(self._match)
         targetindex=self._preferences.index(targetposition)
-        if matchindex<targetindex:
+        if matchindex<targetindex:                             # priority decided by index position, the lower the index the higher the preference
             return False
         else:
             return True
@@ -200,16 +200,15 @@ class Match:
      #
     def stableMatch(self)->None:
         while not self.checkMatch():
-            for position in self._positions:
-                applicantnumber=0
+            for position in self._positions:  
+                applicantnumber=0                                                  # used to keep track of the index of the list of preferences from the position
                 while not self._data[position].full():
-                    student=self._data[position].getPreference()[applicantnumber]
-                    student=self._data[student]
-                    checking=student.getName()
-                    if student.getMatch()==None:
+                    student=self._data[position].getPreference()[applicantnumber]  # pulls up the targeted applicant based on the position's preferences
+                    student=self._data[student]                                    # targeted student object data pulled from dictionary and assigned
+                    if student.getMatch()==None:                                
                         student.setMatch(position)
                         self._data[position].addMatch(student.getName())
-                    elif student.checkPriority(position):
+                    elif student.checkPriority(position):                          # checkPriority function called to see if the student prefers the target position
                         temp=student.getMatch()
                         student.setMatch(position)
                         self._data[temp].removeMatch(student.getName())
