@@ -8,9 +8,9 @@ def pathing_creator(name:str)->str:
         path=os.path.dirname(os.path.realpath(sys.executable))  
     elif __file__:
         path=os.path.dirname(__file__)
-    return os.path.join(path,name)
+    return os.path.join(path,'MatchingInput',name)
 
-file=pathing_creator('input.txt')
+file=pathing_creator('input_3.txt')
 applicantdata=[]
 positiondata=[]
 switch=False
