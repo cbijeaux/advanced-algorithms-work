@@ -10,7 +10,7 @@ def pathing_creator(name:str)->str:  #pathing in VScode is odd, so this is added
         path=os.path.dirname(__file__)
     return os.path.join(path,'MatchingInput',name)  
 
-file=pathing_creator('input_3.txt')
+file=pathing_creator('input_4.txt')
 applicantdata=[]
 positiondata=[]
 switch=False
