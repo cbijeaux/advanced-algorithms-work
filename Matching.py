@@ -23,8 +23,8 @@ class position:
     # Return Value: list
     # Usage: returns the preference of the position
     #
-    def getPreference(self)->list:
-        return self._preference
+    def getPreference(self,prioritynumber)->list:
+        return self._preference[prioritynumber]
     #
      # Method name: getOpenings
      # Formal Parameters: None
@@ -197,7 +197,7 @@ class Match:
             for position in self._positions:  
                 applicantnumber=0                                                  # used to keep track of the index of the list of preferences from the position
                 while not self._data[position].full():
-                    studentname=self._data[position].getPreference()[applicantnumber]  # pulls up the targeted applicant based on the position's preferences
+                    studentname=self._data[position].getPreference(applicantnumber)  # pulls up the targeted applicant based on the position's preferences
                     student=self._data[studentname]                                    # targeted student object data pulled from dictionary and assigned
                     if student.getMatch()==None:                                
                         student.setMatch(position)
